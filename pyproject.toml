@@ -5,17 +5,86 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "anki"
 version = "0.0.1"
-authors = [
-	{ name="Это вы!", email="author@example.com" }
-]
-description = "Игра Карты Anki"
+description = "Консольный тренажёр перевода слов в стиле карточек Anki"
 readme = "README.md"
 requires-python = ">=3.9"
+authors = [
+    { name = "v1ktr", email = "sipinvictor@gmail.com" },
+]
+keywords = ["anki", "flashcards", "cli", "education", "oop"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Intended Audience :: Education",
+    "Topic :: Education",
+    "Typing :: Typed",
+]
 dependencies = [
-	"pytest"
+    "requests>=2.31",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "mypy>=1.8",
+    "ruff>=0.6",
+    "black>=24.0",
+    "types-requests>=2.31",
+]
+
+[project.urls]
+Repository = "https://github.com/v1ktr/anki-cards-oop"
 
 [project.scripts]
 anki = "anki.main:main"
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+anki = ["words.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "src/anki/tests"]
+
+[tool.mypy]
+files = ["src/anki"]
+check_untyped_defs = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+src = ["src"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # длину строки контролирует форматтер
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["anki"]
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"

@@ -1,0 +1,12 @@
+яблоко,apple
+кот,cat
+дом,house
+кошка,cat
+собака,dog
+птица,bird
+школа,school
+стол,table
+кровать,bed
+питон,python
+яндекс,yandex
+газ,gas
